@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: chess-buddy-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: starter            # standard for beta
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false          # https://your-app.vercel.app
+      - key: ALLOWED_ORIGIN_REGEX
+        sync: false          # https://your-project-.*\.vercel\.app  (preview deploys)
+      - key: HASH_MB
+        value: "16"
+      - key: ENGINE_COUNT
+        value: "1"
