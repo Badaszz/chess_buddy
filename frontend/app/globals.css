@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --background: #eaf3ff;
+  --foreground: #15324f;
+  --surface: #f7fbff;
+  --surface-raised: #edf5ff;
+  --line: #bfd4eb;
+  --blue: #235a91;
+  --blue-strong: #164675;
+  --muted: #5b7490;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: linear-gradient(145deg, #e6f1ff 0%, #f4f8ff 52%, #e1edfb 100%);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), sans-serif;
+}
+.app-shell { color: var(--foreground); }
+.app-panel {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(247, 251, 255, .94);
+  box-shadow: 0 8px 24px rgba(35, 83, 132, .08);
+}
+.blue-control {
+  border: 1px solid #adc8e5;
+  border-radius: 6px;
+  background: #f5f9ff;
+  color: #234d77;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.blue-control:hover:not(:disabled) { background: #e6f1ff; border-color: #83add7; }
+.blue-primary {
+  border-radius: 6px;
+  background: #245d97;
+  color: #fff;
+  transition: background-color .15s ease;
+}
+.blue-primary:hover:not(:disabled) { background: #174b80; }
+.chat-panel {
+  border: 1px solid #9bbce0;
+  border-radius: 10px;
+  background: rgba(248, 251, 255, .97);
+  box-shadow: 0 12px 28px rgba(35, 83, 132, .12);
+}
+.chat-history {
+  min-height: 180px;
+  max-height: 320px;
+  overflow-y: auto;
+  border: 1px solid #d1e1f2;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #f3f8ff, #eaf3fd);
+}
+.chat-empty {
+  border: 1px dashed #b4cce6;
+  border-radius: 8px;
+  background: #f5f9ff;
+  color: var(--muted);
+}
+.chat-action {
+  border: 1px solid #b5cde7;
+  border-radius: 999px;
+  background: #edf5ff;
+  color: #285783;
+}
+.chat-action:hover:not(:disabled) { background: #dcecff; }
+.chat-message-user { background: #285f98; color: white; }
+.chat-message-coach { background: #dcecff; color: #183d61; }
+.chat-input {
+  border: 1px solid #aec8e4;
+  border-radius: 6px;
+  background: #fff;
+  color: #173a5c;
+}
+.chat-input:focus { outline: 2px solid #8bb8e6; outline-offset: 1px; }
+.muted-blue { color: var(--muted); }
+
+@keyframes pop { 0% { transform: scale(.7); } 60% { transform: scale(1.15); } 100% { transform: scale(1); } }
+.avatar-pop { animation: pop .25s ease-out; }
+@media (prefers-reduced-motion: reduce) { .avatar-pop { animation: none; } }
