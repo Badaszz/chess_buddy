@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from sqlalchemy import JSON, DateTime, ForeignKey, Integer, String, Text
+from sqlalchemy import JSON, DateTime, ForeignKey, Integer, String, Text, Boolean
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
@@ -47,4 +47,17 @@ class ChatMessage(Base):          # used in Phase 3; created now so there's no m
     fen: Mapped[str] = mapped_column(Text)
     role: Mapped[str] = mapped_column(String(10))
     content: Mapped[str] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+
+
+class CoachLog(Base):             # new table, so create_all adds it with no migration
+    __tablename__ = "coach_logs"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    game_id: Mapped[str] = mapped_column(String(32), index=True)
+    model: Mapped[str] = mapped_column(String(64))
+    attempts: Mapped[int] = mapped_column(Integer)
+    fallback: Mapped[bool] = mapped_column(Boolean)
+    fallback_reason: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    bad_moves: Mapped[list] = mapped_column(JSON)
+    first_token_ms: Mapped[int | None] = mapped_column(Integer, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)

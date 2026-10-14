@@ -9,7 +9,7 @@ from .config import settings
 from .db import init_db
 from .engine import EngineBusy, EngineManager
 from .errors import ApiError
-from .routes import analysis, games
+from .routes import analysis, games, chat
 
 
 @asynccontextmanager
@@ -33,6 +33,7 @@ app.add_middleware(
 )
 app.include_router(games.router)
 app.include_router(analysis.router)
+app.include_router(chat.router)
 
 
 def _err(status: int, code: str, message: str, headers: dict | None = None):

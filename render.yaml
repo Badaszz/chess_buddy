@@ -18,3 +18,9 @@ services:
         value: "16"
       - key: ENGINE_COUNT
         value: "1"
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        sync: false
+      - key: COACH_ENABLED
+        value: "true"

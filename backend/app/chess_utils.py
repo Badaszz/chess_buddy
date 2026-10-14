@@ -72,3 +72,18 @@ def parse_fen(fen: str) -> chess.Board:
     if not b.is_valid():
         raise ApiError(422, "invalid_fen", "That position is not legal")
     return b
+
+
+def position_at(pgn: str, ply: int | None):
+    """Replay a stored game to `ply`. Returns (board, board_before_last_move, last_move, ply)."""
+    game = chess.pgn.read_game(io.StringIO(pgn))
+    moves = list(game.mainline_moves())
+    n = len(moves) if ply is None else ply
+    if n > len(moves):
+        raise ApiError(422, "bad_ply", "That position is past the end of the game")
+    board, prev, last = game.board(), None, None
+    for i, mv in enumerate(moves[:n]):
+        if i == n - 1:
+            prev, last = board.copy(), mv
+        board.push(mv)
+    return board, prev, last, n

@@ -18,6 +18,13 @@ class Settings(BaseSettings):
     multipv_cap: int = 3
     review_depth: int = 14
     mood_depth: int = 10
+    
+    coach_enabled: bool = True          # kill switch: false -> facts-only replies, zero LLM spend
+    groq_api_key: str = ""
+    groq_model: str = ""                # pick in the Groq console; I can't verify current model IDs
+    groq_base_url: str = "https://api.groq.com/openai/v1"
+    chat_history_turns: int = 6
+    facts_depth: int = 14               # lower to 10-12 on Starter if first-token latency hurts
 
     @property
     def origins(self) -> list[str]:

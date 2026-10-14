@@ -5,3 +5,5 @@ pydantic-settings
 sqlalchemy[asyncio]
 asyncpg
 aiosqlite
+openai
+httpx
